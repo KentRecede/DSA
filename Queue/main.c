@@ -17,6 +17,9 @@ int main(){
     display(&q);
     dequeue(&q);
     display(&q);
+    enqueue(&q, 40);
+    display(&q);
+    printf("%d", middleQueue(&q));
     
 
 

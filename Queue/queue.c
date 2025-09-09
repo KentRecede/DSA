@@ -14,6 +14,18 @@ bool isEmpty(Queue *q){
     return (q->rear == -1);
 }
 
+int size(Queue *q){
+    if(isEmpty(q)){
+        return 0;
+    }
+
+    if(q->rear >= q->front){
+        return q->rear - q->front + 1;
+    }else{
+        return MAX - q->front + q->rear + 1;
+    }
+}
+
 bool isFull(Queue *q){
     return ((q->rear + 1) % MAX) == q->front && !isEmpty(q);
 }
@@ -48,6 +60,19 @@ bool dequeue(Queue *q){
 
 int front(Queue *q){
     return q->arr[q->front];
+}
+
+int middleQueue(Queue *q){
+    if(isEmpty(q)){
+        return 0;
+    }
+
+    int n = size(q);
+    int mid = n / 2;
+
+    int pos = (q->front + mid) % MAX;
+
+    return q->arr[pos];
 }
 
 void display(Queue *q){
