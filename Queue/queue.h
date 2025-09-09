@@ -18,7 +18,7 @@ bool isFull(Queue *q);
 bool enqueue(Queue *q, int data);
 bool dequeue(Queue *q);
 int front(Queue *q);
-void display(Queue q);
+void display(Queue *q);
 
 
 #endif

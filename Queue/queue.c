@@ -40,7 +40,7 @@ bool dequeue(Queue *q){
         q->front = 0;
         q->rear = -1;
     }else{
-        q->front == (q->front + 1) % MAX;
+        q->front = (q->front + 1) % MAX;
     }
 
     return true;
@@ -50,17 +50,17 @@ int front(Queue *q){
     return q->arr[q->front];
 }
 
-void display(Queue q){
-    if(isEmpty(&q)){
+void display(Queue *q){
+    if(isEmpty(q)){
         printf("No bullets!! Go reload");
         return;
     }
 
-    int i = q.front;
+    int i = q->front;
 
     while(true){
-        printf("%d ", q.arr[i]);
-        if(i == q.rear) break;
+        printf("%d ", q->arr[i]);
+        if(i == q->rear) break;
         i = (i + 1) % MAX;
     }
 

@@ -10,13 +10,15 @@ int main(){
     initQueue(&q);
 
     enqueue(&q, 10);
-    display(q);
+    display(&q);
     enqueue(&q, 20);
-    display(q);
+    display(&q);
     enqueue(&q, 30);
-    display(q);
+    display(&q);
     dequeue(&q);
-    display(q);
+    display(&q);
+    
+
 
 
 
