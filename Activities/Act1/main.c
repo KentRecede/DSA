@@ -22,7 +22,7 @@ int main() {
 
     int choice;
     do {
-        printf("\n✈️ Flight Management System\n");
+        printf("\nFlight Management System\n");
         printf("1. Create and Add Flight\n");
         printf("2. Remove Flight by ID\n");
         printf("3. Show All Flights\n");
@@ -82,6 +82,5 @@ int main() {
     } while(choice != 0);
 
     
-    free(f.flights);
     return 0;
 }
