@@ -16,12 +16,12 @@ int main() {
     FlightQueue q;
     initQueue(&q);
 
-    // Create flights
+
     Flight f1 = {1, "Manila", "Tokyo", {8,30}, {11,15}};
     Flight f2 = {2, "Cebu", "Singapore", {10,15}, {13,45}};
     Flight f3 = {3, "Davao", "Bangkok", {12,45}, {15,30}};
 
-    // Enqueue flights
+    
     printf("Enqueuing Flight 1...\n");
     enqueueFlight(&q, f1);
     display(q);
@@ -34,12 +34,12 @@ int main() {
     enqueueFlight(&q, f3);
     display(q);
 
-    // Peek at the next flight to board
+    
     Flight next = peekQueue(q);
     printf("\nNext to board: Flight %d (%s -> %s)\n",
            next.id, next.origin, next.destination);
 
-    // Dequeue flights as they board
+    
     printf("\nBoarding flights...\n");
     while (!isQueueEmpty(&q)) {
         Flight boarded = dequeueFlight(&q);
