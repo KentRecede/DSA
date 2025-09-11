@@ -20,4 +20,6 @@ int main(){
     pop(&s);
     display(s);
     printf("%d", peek(&s));
+
+    return 0;
 }
