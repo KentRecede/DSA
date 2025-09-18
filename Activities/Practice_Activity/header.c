@@ -72,7 +72,7 @@ bool dequeue(Queue *q){
 }
 
 void displayStack(Stack s){
-
+    
 }
 
 void displayQueue(Queue q){
