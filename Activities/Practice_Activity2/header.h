@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 
 #define MAX 10
 
@@ -44,6 +45,7 @@ bool isEmpty(Queue q);
 bool isFull(Queue q);
 
 void displayTravesal(Queue q);
+bool insertSortedQueueBasedOnExpiryDate(Queue *q, Product p);
 
 
 #endif

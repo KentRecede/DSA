@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 
 #include "header.h"
 
@@ -78,17 +79,26 @@ bool isFull(Queue q) {
     return (q.rear + 2) % MAX == q.front;    
 }
 
-void displayTravesal(Queue q) {
-    // Product p;
-    // printf("%10s | %10s | %11s | %10s | %s\n", "ID", "NAME", "DATE EXPIRY", "PRICE", "QTY");
-    // for(int i = q.front; ?? ; ??) {
-    //     p = q.prods[i];
-    //     printf("%10d | %10s | ", p.prodID, p.prodName);
-    //     displayDate(p.prodExp);
-    //     printf(" | Php %6.2f | %d\n", p.prodPrice, p.prodQty);
-    // }
-    // printf("\n");
+void displayTraversal(Queue q) {
+    if (isEmpty(q)) {
+        printf("Queue is empty.\n");
+        return;
+    }
+
+    printf("%10s | %10s | %11s | %10s | %s\n",
+           "ID", "NAME", "DATE EXPIRY", "PRICE", "QTY");
+
+    for (int i = q.front; i != (q.rear + 1) % MAX; i = (i + 1) % MAX) {
+        Product p = q.prods[i];
+
+        printf("%10d | %10s | ", p.prodID, p.prodName);
+        displayDate(p.prodExp);
+        printf(" | Php %6.2f | %d\n", p.prodPrice, p.prodQty);
+    }
+
+    printf("\n");
 }
+
 
 Date createDate(int date, int month, int year) {
     Date d;
@@ -114,11 +124,35 @@ Product createProduct(int id, char name[], Date dexp, float price, int qty) {
 
 void populateStack(ProductStk s) {
     s[0] = createProduct(3, "", createDate(0, 0, 0), 0.0, 0);
-    s[1] = createProduct(1005, "Binangkal", createDate(15, 6, 2026), 12.50, 40);
-    s[2] = createProduct(1010, "Bingka", createDate(12, 7, 2027), 20.00, 5);
-    s[3] = createProduct(1020, "Budbud", createDate(12, 7, 2027), 20.00, 5);
+    s[1] = createProduct(1005, "Binangkal", createDate(1, 6, 2026), 12.50, 40);
+    s[2] = createProduct(1010, "Bingka", createDate(9, 7, 2027), 20.00, 5);
+    s[3] = createProduct(1020, "Budbud", createDate(12, 5, 2027), 20.00, 5);
 }
 
-void insertSortedQueueBasedOnExpiryDate(Queue *q, Product p){
-    
+bool insertSortedQueueBasedOnExpiryDate(Queue *q, Product p) {
+    if (isFull(*q)) {
+        return false;  
+    }
+
+    Queue temp = createQueue();
+    bool inserted = false;
+
+    while (!isEmpty(*q)) {
+        Product curr = dequeue(q);
+
+        if (!inserted && dateDifference(p.prodExp, curr.prodExp) < 0) {
+            enqueue(&temp, p);
+            inserted = true;
+        }
+
+        enqueue(&temp, curr);
+    }
+
+    // If still not inserted, append at the end
+    if (!inserted) {
+        enqueue(&temp, p);
+    }
+
+    *q = temp;
+    return true;  // success
 }
